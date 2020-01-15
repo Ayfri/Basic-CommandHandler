@@ -16,7 +16,6 @@ In `owners` you have to add your ID (in a String).
 module.exports.run = async (client, message, args) => {}module.exports.config = {    category: "",    name: __filename.slice(__dirname.length + 1, __filename.length - 3),    aliases: [],    serverForced: false}module.exports.help = {    description: "",    utilisations: ``,    exemples: ``}
 ```
 
-You can also use `category: __dirname.split('/')[__dirname.split('/').length - 1],` for the category to automatically use the dir name.
 The name of the command is the name of the file.
 All of the props in the modules are required.
 
