@@ -1,6 +1,6 @@
 # basicCommandHandler
 
-This is is a simple command Handler using `module.exports` for config, run function and help module for an help command auto-generated.
+This is a simple Command Handler using `module.exports` for config, run function and help module for an help command auto-generated.
 
 ## Configuration
 
@@ -42,4 +42,4 @@ The `client` object has added methods and props like :
 | events | Enmap Object. |
 | writeFile( Path, JSObject ) | Safelly save your JSObject in a JSON. |
 
-#### This project will not received updates (unless bugs fixes) because I'm working on a new Fresh Command Handler with Classes. This Command Handler is very old and I have progressed a lot since.
+#### This project will not received updates (unless bugs fixes) because I'm working on a new fresh Command Handler with Classes. This Command Handler is very old and I have progressed a lot since.
