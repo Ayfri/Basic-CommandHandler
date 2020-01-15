@@ -5,4 +5,4 @@ const manager = new ShardingManager('./main.js', {
   	respawn: true,
   	token: config.token});
 manager.spawn();
-// Le bot gère les shards tout seul.
+// The bot manages shard number on its own.
