@@ -1,15 +1,15 @@
 module.exports.run = async (client, message, args) => {
-	return message.channel.send("Le bot fonctionne !");
+	return message.channel.send('The bot is working !');
 }
 module.exports.config = {
-	category: "utile",
+	category: "tests",
 	name: __filename.slice(__dirname.length + 1, __filename.length - 3),
-	aliases: ["h"],
+	aliases: ['t'],
 	serverForced: false
 }
 
 module.exports.help = {
-	description: "Commande d'aide.",
-	utilisations: `help`,
+	description: "Test command.",
+	utilisations: `test`,
 	exemples: ``
 }
