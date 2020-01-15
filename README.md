@@ -13,7 +13,22 @@ In `owners` you have to add your ID (in a String).
 ### Command
 
 ```js
-module.exports.run = async (client, message, args) => {}module.exports.config = {    category: "",    name: __filename.slice(__dirname.length + 1, __filename.length - 3),    aliases: [],    serverForced: false}module.exports.help = {    description: "",    utilisations: ``,    exemples: ``}
+module.exports.run = async (client, message, args) => {
+	// Code goes here.
+}
+
+module.exports.config = {
+  category: "",
+  name: __filename.slice(__dirname.length + 1, __filename.length - 3),
+  aliases: [],
+  serverForced: false
+}
+
+module.exports.help = {
+  description: "",
+  utilisations: ``,
+  exemples: ``
+}
 ```
 
 The name of the command is the name of the file.
@@ -22,7 +37,9 @@ All of the props in the modules are required.
 ### Event
 
 ```js
-module.exports = async (client, event arguments) => {}
+module.exports = async (client, event arguments) => {
+	// Code goes here.
+}
 ```
 
 ## Helps
