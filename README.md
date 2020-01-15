@@ -4,6 +4,7 @@ This is a simple Command Handler using `module.exports` for config, run function
 
 ## Configuration
 
+To start the bot you have to start with NodeJS the `main.js` file. IF you want the bot to be sharded, start with le `index.js` file.
 There is a config file, `informations/config.json`.
 In `owners` you have to add your ID (in a String).
 
@@ -39,7 +40,6 @@ The `client` object has added methods and props like :
 | Field name | Description |
 | --- | --- |
 | commands | Enmap Object. |
-| events | Enmap Object. |
 | writeFile( Path, JSObject ) | Safelly save your JSObject in a JSON. |
 
 #### This project will not received updates (unless bugs fixes) because I'm working on a new fresh Command Handler with Classes. This Command Handler is very old and I have progressed a lot since.
