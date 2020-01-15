@@ -4,33 +4,24 @@ const fs = require("fs");
 const chalk = require("chalk");
 const client = new Discord.Client();
 
-const configBOT = require("./informations/config");
+const configBOT = require('./informations/config');
 
 client.login(configBOT.token);
 client.writeFile = (path, object) => {
-	if(Object.entries(object).length === 0) throw new Error("L'object que vous voulez enregistrer a un problème et est vide.\nPar sécurité une erreur a été créée et le fichier n'a donc pas été enregistré.");
+	if(Object.entries(object).length === 0) throw new Error("The object you want to save has a problem and is empty.\n For security reasons, an error was created and the file was therefore not saved.");
 	fs.writeFile(path, JSON.stringify(object, null, 4), err => {
-		if(err) return console.error(chalk.red("Une erreur au moment d'enregistrer un fichier est arrivée :\n\n"+err.stack));
+		if(err) return console.error(chalk.red("An error occurred while saving the file :\n\n"+err.stack));
 	});
 }
 
 let numberFiles = 0, events, commands;
 
-// Chargement des fichiers JSONS.
-fs.readdir("./informations/", (err, files) => {
-	console.log(chalk.red.bold("\n\nLancement du bot.\n\n"));
-	if(err) return console.error(err);
-	files.forEach(file => {
-		if(!file.endsWith(".json")) return;
-		console.log(chalk.white(`Fichier externe : `)+chalk.redBright(`${file}`));
-	});
-	numberFiles+=files.length-2;
-});
+console.log(chalk.red.bold("\n\Starting bot.\n\n"));
 
-// Chargement des évènements.
-fs.readdir("./events/", (err, files) => {
+// Loading Events.
+fs.readdir('./events/', (err, files) => {
 	if(err) return console.error(err);
-	console.log(`\nÉvènements : (`+chalk.magenta.bold(`${files.length}`)+")");
+	console.log(`\nEvents : (`+chalk.magenta.bold(`${files.length}`)+")");
 	events = files.length;
 	files.forEach(file => {
 		if(!file.endsWith(".js")) return;
@@ -39,7 +30,7 @@ fs.readdir("./events/", (err, files) => {
 		client.on(eventName, event.bind(null, client));
 		delete require.cache[require.resolve(`./events/${file}`)];
 
-		console.log(chalk.white(`Chargement de l'évènement : `)+chalk.redBright(`${eventName}`));
+		console.log(chalk.white('Loading of the events : ')+chalk.redBright(`${eventName}`));
 	});
 
 	numberFiles+=files.length;
@@ -48,13 +39,13 @@ fs.readdir("./events/", (err, files) => {
 client.commands = new Enmap();
 client.aliases = new Enmap();
 
-// Chargement des commandes.
-fs.readdir("./commands/", (err, files) => {
+// Loading Commands.
+fs.readdir('./commands/', (err, files) => {
 
 	if(err) return console.error(err);
-	console.log(`\nCommandes : (`+chalk.magenta.bold(`${files.length}`)+")");
+	console.log(`\nCommands : (`+chalk.magenta.bold(`${files.length}`)+")");
 	commands = files.length;
-	if(files.length <= 0) return console.log(chalk.red("== ERREUR ==\n\n Fichier : index.js \nAucun fichiers de commandes n'a été trouvé."));
+	if(files.length <= 0) return console.log(chalk.red("[ERROR]\n\n File : index.js \nNo command was found."));
 	files.forEach(file => {
 		
 		if(!file.endsWith("js")) return;
@@ -67,10 +58,10 @@ fs.readdir("./commands/", (err, files) => {
 
 
 		let aliases = props.config.aliases.map(e=>e.toString()).join(", ");
-		console.log(chalk.white(`Chargement de la commande : `)+chalk.redBright(`${commandName}`));
-		console.log(chalk.white(`Raccourcis : `)+chalk.cyan(`${aliases}\n`));
+		console.log(chalk.white('Loading command : ')+chalk.redBright(`${commandName}`));
+		console.log(chalk.white(`Aliases : `)+chalk.cyan(`${aliases}\n`));
 	});
 
 	numberFiles+=files.length;
-	console.log(chalk.white(`Chargement total de `)+chalk.magenta.bold(`${numberFiles}`)+chalk.white(` fichiers dont ${chalk.magenta.bold(commands)} commandes et ${chalk.magenta.bold(events)} évènements.`));
+	console.log(chalk.white('Loading a total of ')+chalk.magenta.bold(`${numberFiles}`)+chalk.white(` files with ${chalk.magenta.bold(commands)} commands and ${chalk.magenta.bold(events)} events.`));
 });
