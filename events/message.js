@@ -1,11 +1,9 @@
-﻿const config = require("../informations/config");
-const colorchalk = require("chalk");
+const config = require("../informations/config");
+const chalk = require("chalk");
 const Discord = require("discord.js");
-const chalk = new colorchalk.constructor({level: 3});
 const moment = require("moment");
 
 module.exports = async (client, message) => {
-	// Creation of prefixes and args.
 	if(message.author.bot) return;
 	const prefixes = ["!",`<@${client.user.id}>`];
 	let prefix = false;
