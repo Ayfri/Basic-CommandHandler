@@ -4,7 +4,7 @@ This is a simple Command Handler using `module.exports` for config, run function
 
 ## Configuration
 
-To start the bot you have to start with NodeJS the `main.js` file. IF you want the bot to be sharded, start with le `index.js` file.
+To start the bot you have to start with NodeJS the `main.js` file. If you want the bot to be sharded, start with le `index.js` file.
 There is a config file, `informations/config.json`.
 In `owners` you have to add your ID (in a String).
 
