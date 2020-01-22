@@ -10,6 +10,6 @@ module.exports.config = {
 
 module.exports.help = {
 	description: "Test command.",
-	utilisations: `test`,
-	exemples: ``
+	usages: `test`,
+	examples: ``
 }
