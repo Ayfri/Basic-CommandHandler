@@ -5,7 +5,7 @@ module.exports.run = async (client, message, args) => {
 		embed.setTitle(`Help on command : ${command.name}`);
 		embed.setDescription(`<> = Required, [] = Optional\nCategory : **${command.category}**\nAvailable in private messages : **${command.serverForced ? 'no' : 'yes'}**`);
 		embed.addField('Description :', command.description);
-		embed.addField('Usage :', command.usages.length > 0 ? command.usages : command.name);
+		embed.addField('Usage :', command.syntax.length > 0 ? command.syntax : command.name);
 		embed.addField('Description :', command.description);
 		embed.addField('Alias :', `\`${command.aliases.length > 0 ? command.aliases.join("`, `") : 'None'}\``);
 		
@@ -29,6 +29,6 @@ module.exports.config = {
 
 module.exports.help = {
 	description : 'Command to get the list of the command or help on a command.',
-	usages: `help\nhelp <command>`,
+	syntax: `help\nhelp <command>`,
 	examples    : `help help`
 };
