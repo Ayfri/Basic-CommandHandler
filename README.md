@@ -26,8 +26,8 @@ module.exports.config = {
 
 module.exports.help = {
   description: "",
-  utilisations: ``,
-  exemples: ``
+  usages: ``,
+  examples: ``
 }
 ```
 
