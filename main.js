@@ -16,7 +16,7 @@ client.writeFile = (path, object) => {
 
 let numberFiles = 0, events, commands;
 
-console.log(chalk.red.bold("\n\Starting bot.\n\n"));
+console.log(chalk.red.bold("\n\nStarting bot.\n\n"));
 
 // Loading Events.
 fs.readdir('./events/', (err, files) => {
