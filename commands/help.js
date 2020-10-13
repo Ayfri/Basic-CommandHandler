@@ -1,6 +1,10 @@
 const Discord = require('discord.js');
+const {prefixes} = require('../events/message.js');
+
+
 module.exports.run = async (client, message, args) => {
 	const embed = new Discord.RichEmbed();
+	let command;
 	if (command = client.commands.find(c => args[0] || c.aliases.includes(args[0]))) {
 		embed.setTitle(`Help on command : ${command.name}`);
 		embed.setDescription(`<> = Required, [] = Optional\nCategory : **${command.category}**\nAvailable in private messages : **${command.serverForced ? 'no' : 'yes'}**`);
@@ -11,14 +15,20 @@ module.exports.run = async (client, message, args) => {
 		
 	} else {
 		embed.setTitle('List of the commands :');
+		
+		let prefix = false;
+		for (const thisPrefix of prefixes) {
+			if (message.content.startsWith(thisPrefix)) prefix = thisPrefix;
+		}
 		embed.setFooter(`${message.content.slice(prefix.length).trim().split(/ +/g)[0]}help <command> to get more informations`);
-		const categories = new Set(commands.map(c => c.category));
+		const categories = new Set(client.commands.map(c => c.category));
 		
 		for (let category of categories) {
-			embed.addField(category, commands.map(c => `**\`${c.name}\`** : ${c.description}`);
+			embed.addField(category, client.commands.map(c => `**\`${c.name}\`** : ${c.description}`));
 		}
 	}
-	message.channel.send(embed);
+	
+	await message.channel.send(embed);
 };
 module.exports.config = {
 	category:     'utils',

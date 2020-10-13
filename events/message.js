@@ -1,14 +1,17 @@
 ﻿const config = require('../informations/config');
-const colorchalk = require('chalk');
+const chalk = require('chalk');
 const Discord = require('discord.js');
-const chalk = new colorchalk.constructor({level: 3});
 const moment = require('moment');
 
+
+
 module.exports = async (client, message) => {
-	// Création des préfixes et des args.
-	moment.locale('fr');
-	if (message.author.bot) return;
 	const prefixes = ['!', `<@${client.user.id}>`];
+	module.exports.prefixes =  prefixes;
+	
+	moment.locale('en');
+	if (message.author.bot) return;
+	
 	let prefix = false;
 	for (const thisPrefix of prefixes) {
 		if (message.content.startsWith(thisPrefix)) prefix = thisPrefix;
@@ -16,13 +19,12 @@ module.exports = async (client, message) => {
 	
 	const args = message.content.slice(prefix.length).trim().split(/ +/g);
 	const command = args.shift().toLowerCase();
-	// Args est un tableau regroupant tout les mots du message séparemment, sans le premier qui est le préfix + commande.
 	let cmd = client.commands.get(command) || client.commands.get(client.aliases.get(command));
 	
 	// Vérification des droits.
-	if (cmd && prefix != false) {
+	if (cmd && prefix !== false) {
 		if (!config.owners.includes(message.author.id)) {
-			if (cmd.config.category == 'owner') {
+			if (cmd.config.category === 'owner') {
 				message.channel.send('Vous n\'êtes pas le créateur du bot.');
 				return console.log(chalk.greenBright(cmd.config.name + '.js') +
 				                   chalk.reset(' : ') +
@@ -59,7 +61,7 @@ module.exports = async (client, message) => {
 		}
 		
 		if (message.guild) {
-			if (cmd.config.category == 'modération' && !message.member.permissions.has('KICK_MEMBERS', true)) {
+			if (cmd.config.category === 'modération' && !message.member.permissions.has('KICK_MEMBERS', true)) {
 				// Non modérateur.
 				message.channel.send('Vous n\'êtes pas modérateur sur le serveur donc vous n\'avez pas le droit d\'utiliser cette commande.');
 				return console.log(chalk.greenBright(cmd.config.name + '.js') +
@@ -68,7 +70,7 @@ module.exports = async (client, message) => {
 				                   chalk.reset(` n'a pas la permission de modérateur pour faire la commande ${chalk.cyanBright(cmd.config.name)} sur le serveur ${chalk.magenta(message.guild.name)}.`));
 			}
 			
-			if (cmd.config.category == 'administration' && !message.member.permissions.has('ADMINISTRATOR', true)) {
+			if (cmd.config.category === 'administration' && !message.member.permissions.has('ADMINISTRATOR', true)) {
 				// Non administrateur.
 				message.channel.send('Vous n\'êtes pas adminsitrateur sur le serveur donc vous n\'avez pas le droit d\'utiliser cette commande.');
 				return console.log(chalk.greenBright(cmd.config.name + '.js') +
@@ -90,7 +92,6 @@ module.exports = async (client, message) => {
 		}
 		
 		return (cmd.run(client, message, args)).catch(warning => {
-			// Vous pouvez envoyer l'erreur dans un salon.
 			message.channel.send('Une erreur a eu lieu avec cette commande, le créateur a été avertit de ceci.');
 			console.log(chalk.red(`Une petite erreur a été faite quelque part avec la commande ${chalk.cyanBright(cmd.config.name)}. \nHeure : ` +
 			                      moment().format('LLLL') +
