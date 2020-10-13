@@ -1,4 +1,6 @@
 {
-    "token":"Token de votre bot",
-    "owners":["ID des personnes qui ont accès aux commandes Owner"]	
+	"token": "Token of your bot",
+	"owners": [
+		"IDs of people who have access to Owner commands"
+	]
 }
