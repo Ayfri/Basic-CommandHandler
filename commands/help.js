@@ -7,7 +7,7 @@ module.exports.run = async (client, message, args) => {
 		embed.addField('Description :', command.description);
 		embed.addField('Usage :', command.syntax.length > 0 ? command.syntax : command.name);
 		embed.addField('Description :', command.description);
-		embed.addField('Alias :', `\`${command.aliases.length > 0 ? command.aliases.join("`, `") : 'None'}\``);
+		embed.addField('Alias :', `\`${command.aliases.length > 0 ? command.aliases.join('`, `') : 'None'}\``);
 		
 	} else {
 		embed.setTitle('List of the commands :');
@@ -21,14 +21,14 @@ module.exports.run = async (client, message, args) => {
 	message.channel.send(embed);
 };
 module.exports.config = {
-	category    : 'utils',
-	name        : __filename.slice(__dirname.length + 1, __filename.length - 3),
-	aliases     : ['h'],
-	serverForced: false
+	category:     'utils',
+	name:         __filename.slice(__dirname.length + 1, __filename.length - 3),
+	aliases:      ['h'],
+	serverForced: false,
 };
 
 module.exports.help = {
-	description : 'Command to get the list of the command or help on a command.',
-	syntax: `help\nhelp <command>`,
-	examples    : `help help`
+	description: 'Command to get the list of the command or help on a command.',
+	syntax:      `help\nhelp <command>`,
+	examples:    `help help`,
 };
