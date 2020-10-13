@@ -4,10 +4,9 @@ const Discord = require('discord.js');
 const moment = require('moment');
 
 
-
 module.exports = async (client, message) => {
 	const prefixes = ['!', `<@${client.user.id}>`];
-	module.exports.prefixes =  prefixes;
+	module.exports.prefixes = prefixes;
 	
 	moment.locale('en');
 	if (message.author.bot) return;
@@ -25,78 +24,71 @@ module.exports = async (client, message) => {
 	if (cmd && prefix !== false) {
 		if (!config.owners.includes(message.author.id)) {
 			if (cmd.config.category === 'owner') {
-				message.channel.send('Vous n\'êtes pas le créateur du bot.');
+				message.channel.send('You are not the creator of the bot.');
 				return console.log(chalk.greenBright(cmd.config.name + '.js') +
 				                   chalk.reset(' : ') +
 				                   chalk.yellowBright(message.author.tag) +
-				                   chalk.reset(` a essayé la commande ${chalk.cyanBright(cmd.config.name)} sur le serveur ${chalk.magenta(message.guild.name)}.`));
+				                   chalk.reset(` tried the command ${chalk.cyanBright(cmd.config.name)} on server ${chalk.magenta(message.guild.name)}.`));
 			}
 		} else {
 			if (message.guild) {
 				console.log(`${chalk.greenBright(__filename.slice(__dirname.length +
-				                                                  1))} : ${chalk.yellowBright(message.author.tag)} a fait la commande ${chalk.cyanBright(cmd.config.name)} sur le serveur ${chalk.magenta(message.guild.name)}.`);
+				                                                  1))} : ${chalk.yellowBright(message.author.tag)} executed the command ${chalk.cyanBright(cmd.config.name)} on the guild ${chalk.magenta(message.guild.name)}.`);
 			} else {
 				if (cmd.config.serverForced) {
-					message.channel.send('La commande est uniquement disponible sur un serveur.');
+					message.channel.send('The command is only available on a server.');
 					return console.log(`${chalk.greenBright(__filename.slice(__dirname.length +
-					                                                         1))} : ${chalk.yellowBright(message.author.tag)} a essayé la commande ${chalk.cyanBright(cmd.config.name)} uniquement disponible sur serveur mais en privé.`);
+					                                                         1))} : ${chalk.yellowBright(message.author.tag)} tried the command ${chalk.cyanBright(cmd.config.name)} only available on server but in DM.`);
 				}
 				console.log(`${chalk.greenBright(__filename.slice(__dirname.length +
-				                                                  1))} : ${chalk.yellowBright(message.author.tag)} a fait la commande ${chalk.cyanBright(cmd.config.name)} en privé au bot.`);
+				                                                  1))} : ${chalk.yellowBright(message.author.tag)} executed the command ${chalk.cyanBright(cmd.config.name)} privately to the bot.`);
 			}
-			// En cas d'erreur avec une commande et que l'auteur du message est le créateur.
+			
 			return cmd.run(client, message, args).catch(warning => {
 				let embed = new Discord.RichEmbed();
-				embed.setDescription('Une erreur a eu lieu avec la commande : **' + cmd.config.name + '**.');
-				embed.addField('Erreur :', warning.stack);
+				embed.setDescription('An error occurred with the command : **' + cmd.config.name + '**.');
+				embed.addField('Error :', warning.stack);
 				embed.setFooter(client.user.username, client.user.displayAvatarURL);
 				embed.setTimestamp();
 				embed.setColor('#dd0000');
 				message.channel.send(embed);
-				console.log(chalk.red(`Une petite erreur a été faite quelque part avec la commande ${chalk.cyanBright(cmd.config.name)}. \nHeure : ` +
-				                      moment().format('LLLL') +
-				                      '\nErreur : ' +
-				                      warning.stack));
+				console.log(chalk.red(`A little mistake was made somewhere in the command ${chalk.cyanBright(cmd.config.name)}. \nTime : ` + moment().format('LLLL') + '\nError : ' + warning.stack));
 			});
 		}
 		
 		if (message.guild) {
-			if (cmd.config.category === 'modération' && !message.member.permissions.has('KICK_MEMBERS', true)) {
+			if (cmd.config.category === 'moderation' && !message.member.permissions.has('KICK_MEMBERS', true)) {
 				// Non modérateur.
-				message.channel.send('Vous n\'êtes pas modérateur sur le serveur donc vous n\'avez pas le droit d\'utiliser cette commande.');
+				message.channel.send('You are not moderator on the server so you are not allowed to use this command.');
 				return console.log(chalk.greenBright(cmd.config.name + '.js') +
 				                   chalk.reset(' : ') +
 				                   chalk.yellowBright(message.author.tag) +
-				                   chalk.reset(` n'a pas la permission de modérateur pour faire la commande ${chalk.cyanBright(cmd.config.name)} sur le serveur ${chalk.magenta(message.guild.name)}.`));
+				                   chalk.reset(` does not have moderator permission to make the order ${chalk.cyanBright(cmd.config.name)} on the guild ${chalk.magenta(message.guild.name)}.`));
 			}
 			
 			if (cmd.config.category === 'administration' && !message.member.permissions.has('ADMINISTRATOR', true)) {
 				// Non administrateur.
-				message.channel.send('Vous n\'êtes pas adminsitrateur sur le serveur donc vous n\'avez pas le droit d\'utiliser cette commande.');
+				message.channel.send('You are not an administrator on the server so you are not allowed to use this command.');
 				return console.log(chalk.greenBright(cmd.config.name + '.js') +
 				                   chalk.reset(' : ') +
 				                   chalk.yellowBright(message.author.tag) +
-				                   chalk.reset(` n'a pas la permission d'administrateur pour faire la commande ${chalk.cyanBright(cmd.config.name)} sur le serveur ${chalk.magenta(message.guild.name)}.`));
+				                   chalk.reset(` does not have admin permission to make the order ${chalk.cyanBright(cmd.config.name)} on the guild ${chalk.magenta(message.guild.name)}.`));
 			}
 		}
 		if (message.guild) console.log(`${chalk.greenBright(__filename.slice(__dirname.length +
-		                                                                     1))} : ${chalk.yellowBright(message.author.tag)} a fait la commande ${chalk.cyanBright(cmd.config.name)} sur le serveur ${chalk.magenta(message.guild.name)}.`); else {
+		                                                                     1))} : ${chalk.yellowBright(message.author.tag)} executed the command ${chalk.cyanBright(cmd.config.name)} on the guild ${chalk.magenta(message.guild.name)}.`); else {
 			if (cmd.config.serverForced) {
 				// Pour les commandes uniquement disponibles sur serveur.
-				message.channel.send('La commande est uniquement disponible sur un serveur.');
+				message.channel.send('The command is only available on a server.');
 				return console.log(`${chalk.greenBright(__filename.slice(__dirname.length +
-				                                                         1))} : ${chalk.yellowBright(message.author.tag)} a essayé la commande ${chalk.cyanBright(cmd.config.name)} uniquement disponible sur serveur mais en privé.`);
+				                                                         1))} : ${chalk.yellowBright(message.author.tag)} tried the command ${chalk.cyanBright(cmd.config.name)} only available on server but in DM.`);
 			}
-			console.log(`${chalk.greenBright(__filename.slice(__dirname.length +
-			                                                  1))} : ${chalk.yellowBright(message.author.tag)} a fait la commande ${chalk.cyanBright(cmd.config.name)} en privé au bot.`);
+			console.log(`${chalk.greenBright(__filename.slice(__dirname.length + 1))} : ${chalk.yellowBright(message.author.tag)} executed the command ${chalk.cyanBright(cmd.config.name)} in DM.`);
 		}
 		
 		return (cmd.run(client, message, args)).catch(warning => {
-			message.channel.send('Une erreur a eu lieu avec cette commande, le créateur a été avertit de ceci.');
-			console.log(chalk.red(`Une petite erreur a été faite quelque part avec la commande ${chalk.cyanBright(cmd.config.name)}. \nHeure : ` +
-			                      moment().format('LLLL') +
-			                      '\nErreur : ' +
-			                      warning.stack));
+			message.channel.send('An error has occurred with this command, the creator has been warned of this.');
+			console.log(chalk.red(`A little mistake was made somewhere in the command code ${chalk.cyanBright(cmd.config.name)}. \nTime : ` + moment().format('LLLL') + '\nError : ' + warning.stack));
 		});
 	}
 };

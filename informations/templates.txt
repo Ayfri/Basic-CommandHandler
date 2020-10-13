@@ -1,4 +1,4 @@
-COMMANDE :
+COMMANDS :
 
 module.exports.run = async (client, message, args) => {
 	
@@ -19,7 +19,7 @@ module.exports.help = {
 
 ------------------------------------------------------------------------------------------------
 
-ÉVÉNEMENT :
+EVENTS :
 
 module.exports = async (client, arguments de l'événement) => {
 	
