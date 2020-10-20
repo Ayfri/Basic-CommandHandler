@@ -2,7 +2,7 @@
 	"dependencies": {
 		"better-sqlite-pool": "^0.2.3",
 		"chalk": "~2.4.2",
-		"discord.js": "~11.4.2",
+		"discord.js": "~12.4.0",
 		"enmap": "^4.8.7",
 		"moment": "~2.24.0"
 	}
