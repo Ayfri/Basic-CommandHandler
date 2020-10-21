@@ -3,7 +3,7 @@
 		"better-sqlite-pool": "^0.2.3",
 		"chalk": "~2.4.2",
 		"discord.js": "~11.4.2",
-		"enmap": "^4.8.7",
-		"moment": "~2.29.1"
+		"enmap": "^5.8.0",
+		"moment": "^2.29.1"
 	}
 }
