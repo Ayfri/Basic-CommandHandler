@@ -1,0 +1,15 @@
+version: 2
+updates:
+- package-ecosystem: npm
+  directory: "/"
+  schedule:
+    interval: daily
+    time: "11:00"
+  open-pull-requests-limit: 99
+  ignore:
+  - dependency-name: discord.js
+    versions:
+    - "> 11.4.2"
+  - dependency-name: enmap
+    versions:
+    - 5.8.4
