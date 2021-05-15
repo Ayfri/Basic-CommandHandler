@@ -9,6 +9,7 @@
 		"@types/node": "^15.3.0",
 		"prettier": "^2.3.0"
 	},
+	"main": "main.js",
 	"prettier": {
 		"arrowParens": "avoid",
 		"bracketSpacing": false,
@@ -18,6 +19,7 @@
 		"useTabs": true
 	},
 	"scripts": {
-		"prettier": "prettier **/*.js **/*.json **/*.md --write"
+		"prettier": "prettier **/*.js **/*.json **/*.md --write",
+		"start": "node ."
 	}
 }
