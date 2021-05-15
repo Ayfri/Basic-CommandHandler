@@ -1,14 +1,12 @@
 ﻿const config = require('../informations/config');
 const chalk = require('chalk');
 const Discord = require('discord.js');
-const moment = require('moment');
-
+const dayjs = require('dayjs');
 
 module.exports = async (client, message) => {
 	const prefixes = ['!', `<@${client.user.id}>`];
 	module.exports.prefixes = prefixes;
 
-	moment.locale('en');
 	if (message.author.bot) return;
 
 	let prefix = false;
@@ -52,7 +50,7 @@ module.exports = async (client, message) => {
 				embed.setTimestamp();
 				embed.setColor('#dd0000');
 				message.channel.send(embed);
-				console.log(chalk.red(`A little mistake was made somewhere in the command ${chalk.cyanBright(cmd.config.name)}. \nTime : ` + moment().format('LLLL') + '\nError : ' + warning.stack));
+				console.log(chalk.red(`A little mistake was made somewhere in the command ${chalk.cyanBright(cmd.config.name)}. \nTime : ` + dayjs().format('LLLL') + '\nError : ' + warning.stack));
 			});
 		}
 
@@ -88,7 +86,7 @@ module.exports = async (client, message) => {
 
 		return (cmd.run(client, message, args)).catch(async warning => {
 			await message.channel.send('An error has occurred with this command, the creator has been warned of this.');
-			console.log(chalk.red(`A little mistake was made somewhere in the command code ${chalk.cyanBright(cmd.config.name)}. \nTime : ` + moment().format('LLLL') + '\nError : ' + warning.stack));
+			console.log(chalk.red(`A little mistake was made somewhere in the command code ${chalk.cyanBright(cmd.config.name)}. \nTime : ` + dayjs().format('LLLL') + '\nError : ' + warning.stack));
 		});
 	}
 };
