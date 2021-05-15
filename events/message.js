@@ -2,18 +2,15 @@
 const chalk = require('chalk');
 const Discord = require('discord.js');
 const dayjs = require('dayjs');
+const {getPrefix, findCommand} = require('../utils/utils.js');
 
 module.exports = async (client, message) => {
-	const prefixes = ['!', `<@${client.user.id}>`];
-	module.exports.prefixes = prefixes;
-
 	if (message.author.bot) return;
 
-	const prefix = prefixes.find(prefix => message.content.startsWith(prefix)) ?? null;
+	const prefix = getPrefix(message);
 
 	const args = message.content.slice(prefix.length).trim().split(/ +/g);
-	const commandArg = args.shift().toLowerCase();
-	const command = client.commands.get(commandArg) || client.commands.get(client.aliases.get(commandArg));
+	const command = findCommand(client, args.shift().toLowerCase());
 
 	// Verification of permissions.
 	if (command && prefix) {

@@ -1,9 +1,10 @@
 const Discord = require('discord.js');
+const {findCommand} = require('../utils/utils.js');
 const {prefixes} = require('../events/message.js');
 
 module.exports.run = async (client, message, args) => {
 	const embed = new Discord.MessageEmbed();
-	const command = client.commands.find(c => args[0] || (c.aliases && c.aliases.includes(args[0])));
+	const command = findCommand(client, args[0]);
 	if (command) {
 		embed.setTitle(`Help on command : ${command.name}`);
 		embed.setDescription(
@@ -31,7 +32,7 @@ module.exports.run = async (client, message, args) => {
 	await message.channel.send(embed);
 };
 module.exports.config = {
-	category: 'utils',
+	category: 'utils.js',
 	name: __filename.slice(__dirname.length + 1, __filename.length - 3),
 	aliases: ['h'],
 	serverForced: false,

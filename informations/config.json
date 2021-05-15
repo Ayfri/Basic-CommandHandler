@@ -1,4 +1,5 @@
 {
-	"token": "Token of your bot",
-	"owners": ["IDs of people who will have access to Owner commands"]
+	"owners": ["IDs of people who will have access to Owner commands"],
+	"prefixes": ["!"],
+	"token": "Token of your bot"
 }
