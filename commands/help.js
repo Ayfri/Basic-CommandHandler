@@ -2,7 +2,7 @@ const Discord = require('discord.js');
 const {prefixes} = require('../events/message.js');
 
 module.exports.run = async (client, message, args) => {
-	const embed = new Discord.RichEmbed();
+	const embed = new Discord.MessageEmbed();
 	const command = client.commands.find(c => args[0] || (c.aliases && c.aliases.includes(args[0])));
 	if (command) {
 		embed.setTitle(`Help on command : ${command.name}`);
@@ -16,10 +16,7 @@ module.exports.run = async (client, message, args) => {
 	} else {
 		embed.setTitle('List of the commands :');
 
-		let prefix = false;
-		for (const thisPrefix of prefixes) {
-			if (message.content.startsWith(thisPrefix)) prefix = thisPrefix;
-		}
+		const prefix = prefixes.find(prefix => message.content.startsWith(prefix)) ?? null;
 		embed.setFooter(`${message.content.slice(prefix.length).trim().split(/ +/g)[0]}help <command> to get more informations`);
 		const categories = new Set(client.commands.map(c => c.category));
 
