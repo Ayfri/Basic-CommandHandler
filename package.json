@@ -5,5 +5,9 @@
 		"discord.js": "~11.6.4",
 		"enmap": "^5.8.5",
 		"moment": "^2.29.1"
+	},
+	"devDependencies": {
+		"@types/chalk": "^2.2.0",
+		"@types/node": "^15.3.0"
 	}
 }
