@@ -9,15 +9,19 @@ I can recommend you the other one I've made : [Advanced Command Handler](https:/
 ## How to use it
 
 Simply clone this repo.
+
 ```bash
 git clone https://github.com/Ayfri/Basic-CommandHandler
 ```
+
 Set the [configuration](#Configuration) and you're ready to go.
 
 If you want to use Discord.js v12, use this command instead.
+
 ```bash
 git clone -b v12 https://github.com/Ayfri/Basic-CommandHandler
 ```
+
 It will clone the `v12` branch of this repo.
 
 ## Configuration
