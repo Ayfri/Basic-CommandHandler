@@ -2,6 +2,24 @@
 
 This is a simple Command Handler using `module.exports` for a configuration, run function and help module for a help command auto-generated.
 
+I'd advice you to know JavaScript and Node.js before using it.<br>
+You'll understand that this Command Handler is very basic and for a big projet you should probably use a better one.<br>
+I can recommend you the other one I've made : [Advanced Command Handler](https://github.com/Advanced-Command-Handler/Advanced-Command-Handler).
+
+## How to use it
+
+Simply clone this repo.
+```bash
+git clone https://github.com/Ayfri/Basic-CommandHandler
+```
+Set the [configuration](#Configuration) and you're ready to go.
+
+If you want to use Discord.js v12, use this command instead.
+```bash
+git clone -b v12 https://github.com/Ayfri/Basic-CommandHandler
+```
+It will clone the `v12` branch of this repo.
+
 ## Configuration
 
 To start the bot you have to start with NodeJS the `main.js` file. If you want the bot to be sharded, start with le `index.js` file. There is a configuration file, `informations/config.json`.
@@ -55,5 +73,3 @@ The `client` object has added methods and props like :
 | --------------------------- | ------------------------------------ |
 | commands                    | Enmap Object.                        |
 | writeFile( Path, JSObject ) | Safely save your JSObject in a JSON. |
-
-#### This project will not receive updates (unless bugs fixes) because I'm working on a new fresh Command Handler with Classes. This Command Handler is very old, and I have progressed a lot since.
