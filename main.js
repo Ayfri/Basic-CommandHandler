@@ -19,7 +19,7 @@ let numberFiles = 0,
 	events,
 	commands;
 
-// Chargement des fichiers JSONS.
+// Loading JSONS files.
 fs.readdir('./informations/', (err, files) => {
 	console.log(chalk.red.bold('\n\nLancement du bot.\n\n'));
 	if (err) return console.error(err);
@@ -30,7 +30,7 @@ fs.readdir('./informations/', (err, files) => {
 	numberFiles += files.length - 2;
 });
 
-// Chargement des évènements.
+// Loading events.
 fs.readdir('./events/', (err, files) => {
 	if (err) return console.error(err);
 	console.log(`\nÉvènements : (` + chalk.magenta.bold(`${files.length}`) + ')');
@@ -51,7 +51,7 @@ fs.readdir('./events/', (err, files) => {
 client.commands = new Enmap();
 client.aliases = new Enmap();
 
-// Chargement des commandes.
+// Loading commands.
 fs.readdir('./commands/', (err, files) => {
 	
 	if (err) return console.error(err);
