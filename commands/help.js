@@ -1,5 +1,4 @@
 const Discord = require('discord.js');
-const {prefixes} = require('../events/message.js');
 
 module.exports.run = async (client, message, args) => {
 	const embed = new Discord.RichEmbed();
@@ -15,6 +14,7 @@ module.exports.run = async (client, message, args) => {
 		embed.addField('Aliases :', `\`${command.aliases.length > 0 ? command.aliases.join('`, `') : 'None'}\``);
 	} else {
 		embed.setTitle('List of the commands :');
+		const prefixes = ['!', `<@${client.user.id}>`];
 
 		let prefix = false;
 		for (const thisPrefix of prefixes) {

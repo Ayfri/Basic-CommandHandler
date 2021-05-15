@@ -5,7 +5,6 @@ const dayjs = require('dayjs');
 
 module.exports = async (client, message) => {
 	const prefixes = ['!', `<@${client.user.id}>`];
-	module.exports.prefixes = prefixes;
 
 	if (message.author.bot) return;
 
