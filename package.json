@@ -6,6 +6,18 @@
 	},
 	"devDependencies": {
 		"@types/chalk": "^2.2.0",
-		"@types/node": "^15.3.0"
+		"@types/node": "^15.3.0",
+		"prettier": "^2.3.0"
+	},
+	"prettier": {
+		"arrowParens": "avoid",
+		"bracketSpacing": false,
+		"printWidth": 160,
+		"singleQuote": true,
+		"tabWidth": 4,
+		"useTabs": true
+	},
+	"scripts": {
+		"prettier": "prettier **/*.js **/*.json **/*.md --write"
 	}
 }
