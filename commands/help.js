@@ -4,15 +4,14 @@ const {prefixes} = require('../events/message.js');
 
 module.exports.run = async (client, message, args) => {
 	const embed = new Discord.RichEmbed();
-	let command;
-	if (command = client.commands.find(c => args[0] || c.aliases.includes(args[0]))) {
+	const command = client.commands.find(c => args[0] || c.aliases && c.aliases.includes(args[0]));
+	if (command) {
 		embed.setTitle(`Help on command : ${command.name}`);
 		embed.setDescription(`<> = Required, [] = Optional\nCategory : **${command.category}**\nAvailable in private messages : **${command.serverForced ? 'no' : 'yes'}**`);
 		embed.addField('Description :', command.description);
 		embed.addField('Usage :', command.syntax.length > 0 ? command.syntax : command.name);
 		embed.addField('Description :', command.description);
-		embed.addField('Alias :', `\`${command.aliases.length > 0 ? command.aliases.join('`, `') : 'None'}\``);
-		
+		embed.addField('Aliases :', `\`${command.aliases.length > 0 ? command.aliases.join('`, `') : 'None'}\``);
 	} else {
 		embed.setTitle('List of the commands :');
 		
