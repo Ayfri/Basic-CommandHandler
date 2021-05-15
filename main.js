@@ -1,5 +1,4 @@
 const Discord = require('discord.js');
-const Enmap = require('enmap');
 const fs = require('fs');
 const chalk = require('chalk');
 const client = new Discord.Client();
@@ -48,8 +47,8 @@ fs.readdir('./events/', (err, files) => {
 	numberFiles += files.length;
 });
 
-client.commands = new Enmap();
-client.aliases = new Enmap();
+client.commands = new Discord.Collection();
+client.aliases = new Discord.Collection();
 
 // Loading commands.
 fs.readdir('./commands/', (err, files) => {

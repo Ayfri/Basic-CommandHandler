@@ -6,4 +6,4 @@ const manager = new ShardingManager('./main.js', {
 	token:       config.token,
 });
 manager.spawn();
-// Le bot gère les shards tout seul.
+// The bot manages the shards on its own.

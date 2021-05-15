@@ -1,7 +1,6 @@
 const Discord = require('discord.js');
 const {prefixes} = require('../events/message.js');
 
-
 module.exports.run = async (client, message, args) => {
 	const embed = new Discord.RichEmbed();
 	const command = client.commands.find(c => args[0] || c.aliases && c.aliases.includes(args[0]));
