@@ -18,28 +18,39 @@ module.exports = async (client, message) => {
 	const command = args.shift().toLowerCase();
 	let cmd = client.commands.get(command) || client.commands.get(client.aliases.get(command));
 
-	// Vérification des droits.
+	// Verification of permissions.
 	if (cmd && prefix !== false) {
 		if (!config.owners.includes(message.author.id)) {
 			if (cmd.config.category === 'owner') {
 				await message.channel.send('You are not the creator of the bot.');
-				return console.log(chalk.greenBright(cmd.config.name + '.js') +
-				                   chalk.reset(' : ') +
-				                   chalk.yellowBright(message.author.tag) +
-				                   chalk.reset(` tried the command ${chalk.cyanBright(cmd.config.name)} on server ${chalk.magenta(message.guild.name)}.`));
+				return console.log(
+					chalk.greenBright(cmd.config.name + '.js') +
+						chalk.reset(' : ') +
+						chalk.yellowBright(message.author.tag) +
+						chalk.reset(` tried the command ${chalk.cyanBright(cmd.config.name)} on server ${chalk.magenta(message.guild.name)}.`)
+				);
 			}
 		} else {
 			if (message.guild) {
-				console.log(`${chalk.greenBright(__filename.slice(__dirname.length +
-				                                                  1))} : ${chalk.yellowBright(message.author.tag)} executed the command ${chalk.cyanBright(cmd.config.name)} on the guild ${chalk.magenta(message.guild.name)}.`);
+				console.log(
+					`${chalk.greenBright(__filename.slice(__dirname.length + 1))} : ${chalk.yellowBright(
+						message.author.tag
+					)} executed the command ${chalk.cyanBright(cmd.config.name)} on the guild ${chalk.magenta(message.guild.name)}.`
+				);
 			} else {
 				if (cmd.config.serverForced) {
 					await message.channel.send('The command is only available on a server.');
-					return console.log(`${chalk.greenBright(__filename.slice(__dirname.length +
-					                                                         1))} : ${chalk.yellowBright(message.author.tag)} tried the command ${chalk.cyanBright(cmd.config.name)} only available on server but in DM.`);
+					return console.log(
+						`${chalk.greenBright(__filename.slice(__dirname.length + 1))} : ${chalk.yellowBright(
+							message.author.tag
+						)} tried the command ${chalk.cyanBright(cmd.config.name)} only available on server but in DM.`
+					);
 				}
-				console.log(`${chalk.greenBright(__filename.slice(__dirname.length +
-				                                                  1))} : ${chalk.yellowBright(message.author.tag)} executed the command ${chalk.cyanBright(cmd.config.name)} privately to the bot.`);
+				console.log(
+					`${chalk.greenBright(__filename.slice(__dirname.length + 1))} : ${chalk.yellowBright(
+						message.author.tag
+					)} executed the command ${chalk.cyanBright(cmd.config.name)} privately to the bot.`
+				);
 			}
 
 			return cmd.run(client, message, args).catch(warning => {
@@ -50,7 +61,14 @@ module.exports = async (client, message) => {
 				embed.setTimestamp();
 				embed.setColor('#dd0000');
 				message.channel.send(embed);
-				console.log(chalk.red(`A little mistake was made somewhere in the command ${chalk.cyanBright(cmd.config.name)}. \nTime : ` + dayjs().format('LLLL') + '\nError : ' + warning.stack));
+				console.log(
+					chalk.red(
+						`A little mistake was made somewhere in the command ${chalk.cyanBright(cmd.config.name)}. \nTime : ` +
+							dayjs().format('LLLL') +
+							'\nError : ' +
+							warning.stack
+					)
+				);
 			});
 		}
 
@@ -58,35 +76,66 @@ module.exports = async (client, message) => {
 			if (cmd.config.category === 'moderation' && !message.member.permissions.has('KICK_MEMBERS', true)) {
 				// Non mod.
 				await message.channel.send('You are not moderator on the server so you are not allowed to use this command.');
-				return console.log(chalk.greenBright(cmd.config.name + '.js') +
-				                   chalk.reset(' : ') +
-				                   chalk.yellowBright(message.author.tag) +
-				                   chalk.reset(` does not have moderator permission to make the order ${chalk.cyanBright(cmd.config.name)} on the guild ${chalk.magenta(message.guild.name)}.`));
+				return console.log(
+					chalk.greenBright(cmd.config.name + '.js') +
+						chalk.reset(' : ') +
+						chalk.yellowBright(message.author.tag) +
+						chalk.reset(
+							` does not have moderator permission to make the order ${chalk.cyanBright(cmd.config.name)} on the guild ${chalk.magenta(
+								message.guild.name
+							)}.`
+						)
+				);
 			}
 
 			if (cmd.config.category === 'administration' && !message.member.permissions.has('ADMINISTRATOR', true)) {
 				// Non admin.
 				await message.channel.send('You are not an administrator on the server so you are not allowed to use this command.');
-				return console.log(chalk.greenBright(cmd.config.name + '.js') +
-				                   chalk.reset(' : ') +
-				                   chalk.yellowBright(message.author.tag) +
-				                   chalk.reset(` does not have admin permission to make the order ${chalk.cyanBright(cmd.config.name)} on the guild ${chalk.magenta(message.guild.name)}.`));
+				return console.log(
+					chalk.greenBright(cmd.config.name + '.js') +
+						chalk.reset(' : ') +
+						chalk.yellowBright(message.author.tag) +
+						chalk.reset(
+							` does not have admin permission to make the order ${chalk.cyanBright(cmd.config.name)} on the guild ${chalk.magenta(
+								message.guild.name
+							)}.`
+						)
+				);
 			}
 		}
-		if (message.guild) console.log(`${chalk.greenBright(__filename.slice(__dirname.length +
-		                                                                     1))} : ${chalk.yellowBright(message.author.tag)} executed the command ${chalk.cyanBright(cmd.config.name)} on the guild ${chalk.magenta(message.guild.name)}.`); else {
+		if (message.guild)
+			console.log(
+				`${chalk.greenBright(__filename.slice(__dirname.length + 1))} : ${chalk.yellowBright(
+					message.author.tag
+				)} executed the command ${chalk.cyanBright(cmd.config.name)} on the guild ${chalk.magenta(message.guild.name)}.`
+			);
+		else {
 			if (cmd.config.serverForced) {
 				// For commands only available on server.
 				await message.channel.send('The command is only available on a server.');
-				return console.log(`${chalk.greenBright(__filename.slice(__dirname.length +
-				                                                         1))} : ${chalk.yellowBright(message.author.tag)} tried the command ${chalk.cyanBright(cmd.config.name)} only available on server but in DM.`);
+				return console.log(
+					`${chalk.greenBright(__filename.slice(__dirname.length + 1))} : ${chalk.yellowBright(
+						message.author.tag
+					)} tried the command ${chalk.cyanBright(cmd.config.name)} only available on server but in DM.`
+				);
 			}
-			console.log(`${chalk.greenBright(__filename.slice(__dirname.length + 1))} : ${chalk.yellowBright(message.author.tag)} executed the command ${chalk.cyanBright(cmd.config.name)} in DM.`);
+			console.log(
+				`${chalk.greenBright(__filename.slice(__dirname.length + 1))} : ${chalk.yellowBright(
+					message.author.tag
+				)} executed the command ${chalk.cyanBright(cmd.config.name)} in DM.`
+			);
 		}
 
-		return (cmd.run(client, message, args)).catch(async warning => {
+		return cmd.run(client, message, args).catch(async warning => {
 			await message.channel.send('An error has occurred with this command, the creator has been warned of this.');
-			console.log(chalk.red(`A little mistake was made somewhere in the command code ${chalk.cyanBright(cmd.config.name)}. \nTime : ` + dayjs().format('LLLL') + '\nError : ' + warning.stack));
+			console.log(
+				chalk.red(
+					`A little mistake was made somewhere in the command code ${chalk.cyanBright(cmd.config.name)}. \nTime : ` +
+						dayjs().format('LLLL') +
+						'\nError : ' +
+						warning.stack
+				)
+			);
 		});
 	}
 };
